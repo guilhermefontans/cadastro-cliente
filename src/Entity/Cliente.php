@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ClienteRepository;
 use App\Validator\Cpf;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ClienteRepository::class)
@@ -20,16 +21,20 @@ class Cliente
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      * @Cpf()
      */
     private $cpf;
