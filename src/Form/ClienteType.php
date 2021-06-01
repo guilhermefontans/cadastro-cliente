@@ -14,10 +14,21 @@ class ClienteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('cpf')
-        ;
+            ->add('name', TextType::class,[
+                'attr' => [
+                    'placeholder' => 'meu nome'
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'placeholder' => 'mail@mail.com'
+                ]
+            ])
+            ->add('cpf', TextType::class, [
+                'attr' => [
+                    'placeholder' => '123.456.789-10'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ClienteRepository;
+use App\Validator\Cpf;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,7 +29,8 @@ class Cliente
     private $email;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=100)
+     * @Cpf()
      */
     private $cpf;
 
@@ -61,12 +63,12 @@ class Cliente
         return $this;
     }
 
-    public function getCpf(): ?int
+    public function getCpf(): ?string
     {
         return $this->cpf;
     }
 
-    public function setCpf(int $cpf): self
+    public function setCpf(string $cpf): self
     {
         $this->cpf = $cpf;
 
