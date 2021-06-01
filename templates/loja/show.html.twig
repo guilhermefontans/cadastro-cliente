@@ -21,6 +21,33 @@
             </tr>
         </tbody>
     </table>
+    <br/>
+    <h5>Produtos da Loja</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if loja.produtos | length >  0 %}
+                {% for produto in loja.produtos %}
+                <tr>
+                    <td>{{ produto.id }}</td>
+                    <td>{{ produto.description }}</td>
+                    <td>{{ produto.value }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">sem produtos</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <br/>
 
     <a href="{{ path('loja_index') }}">back to list</a>
 

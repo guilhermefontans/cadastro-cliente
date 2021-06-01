@@ -21,6 +21,33 @@
             </tr>
         </tbody>
     </table>
+    <br/>
+    <h5>Lojas onde o produto é vendido</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Nif</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if produto.lojas | length >  0 %}
+                {% for loja in produto.lojas %}
+                <tr>
+                    <td>{{ loja.id }}</td>
+                    <td>{{ loja.name }}</td>
+                    <td>{{ loja.nif }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">nenhuma loja vende este produto</td>
+                </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <br/>
 
     <a href="{{ path('produto_index') }}">back to list</a>
 
