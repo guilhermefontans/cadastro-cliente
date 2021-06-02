@@ -5,21 +5,32 @@ namespace App\Controller;
 use App\Entity\Cliente;
 use App\Form\ClienteType;
 use App\Repository\ClienteRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Cache\CacheInterface;
 
 /**
  * @Route("/cliente")
  */
 class ClienteController extends AbstractController
 {
+    /** @var LoggerInterface $logger */
+    private $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     /**
      * @Route("/", name="cliente_index", methods={"GET"})
      */
     public function index(ClienteRepository $clienteRepository): Response
     {
+        $this->logger->info("Chamando listagem de clientes");
         return $this->render('cliente/index.html.twig', [
             'clientes' => $clienteRepository->findAll(),
         ]);
