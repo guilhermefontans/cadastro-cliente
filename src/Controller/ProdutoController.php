@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Produto;
 use App\Form\ProdutoType;
 use App\Repository\ProdutoRepository;
+use App\Service\UploadHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +17,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ProdutoController extends AbstractController
 {
+    /**
+     * @var UploadHelper
+     */
+    private $uploadHelper;
+
+    public function __construct(UploadHelper $uploadHelper)
+    {
+        $this->uploadHelper = $uploadHelper;
+    }
+
     /**
      * @Route("/", name="produto_index", methods={"GET"})
      */
@@ -35,6 +47,14 @@ class ProdutoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['imageFile']->getData();
+            if ($uploadedFile) {
+                $newFilename = $this->uploadHelper->uploadProdutoImage($uploadedFile);
+                $produto->setPhoto($newFilename);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($produto);
             $entityManager->flush();
@@ -67,6 +87,13 @@ class ProdutoController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['imageFile']->getData();
+            if ($uploadedFile) {
+                $newFilename = $this->uploadHelper->uploadProdutoImage($uploadedFile);
+                $produto->setPhoto($newFilename);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('produto_index');

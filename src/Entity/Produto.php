@@ -34,6 +34,11 @@ class Produto
      */
     private $lojas;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
+
     public function __construct()
     {
         $this->lojas = new ArrayCollection();
@@ -98,5 +103,17 @@ class Produto
     public function __toString()
     {
         return sprintf('%d - %s',$this->id, $this->description);
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
     }
 }
