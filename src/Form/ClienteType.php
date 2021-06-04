@@ -8,8 +8,6 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ClienteType extends AbstractType
 {
@@ -17,13 +15,15 @@ class ClienteType extends AbstractType
     {
         $builder
             ->add('name', TextType::class,[
+                'label' => 'form.label.customer.name',
                 'attr' => [
-                    'placeholder' => 'meu nome'
+                    'placeholder' => 'form.label.customer.placeholder.name'
                 ]
             ])
             ->add('email', EmailType::class, [
+                'label' => 'form.label.customer.email',
                 'attr' => [
-                    'placeholder' => 'mail@mail.com'
+                    'placeholder' => 'form.label.customer.placeholder.email'
                 ],
             ])
             ->add('cpf', TextType::class, [

@@ -9,10 +9,10 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Cpf</th>
-                <th>actions</th>
+                <th>{% trans %}form.label.customer.name{% endtrans %}</th>
+                <th>{% trans %}form.label.customer.email{% endtrans %}</th>
+                <th>{% trans %}form.label.customer.cpf{% endtrans %}</th>
+                <th>{% trans %}form.actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">{% trans %}form.no-records{% endtrans %}</td>
             </tr>
         {% endfor %}
         </tbody>
