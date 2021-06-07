@@ -17,6 +17,6 @@ $ docker exec -it web_cadastro_cliente chmod 777 -R /app/var
 ``` 
 4. Criar o schema do banco de dados
 ```sh
-docker exec -it  web_cadastro_cliente php bin/console doctrine:schema:create
+$ docker exec -it  web_cadastro_cliente php bin/console doctrine:schema:create
 ```
 Após efetuar esses passos, acessar o seguinte endereço em seu navegador: http://localhost
