@@ -13,7 +13,7 @@ $ docker run  --rm  --volume $PWD:/app --user $(id -u):$(id -g)   composer insta
 ```
 3. Alterar as permissões do diretorio var:
 ```sh
-$ docker-compose exec web_cadastro_cliente chmod 777 -R /app/var
+$ docker exec -it web_cadastro_cliente chmod 777 -R /app/var
 ``` 
 4. Criar o schema do banco de dados
 ```sh
