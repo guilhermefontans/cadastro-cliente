@@ -11,6 +11,7 @@ services:
     depends_on:
       - db
   db:
+    platform: linux/x86_64
     container_name: db_cadastro_cliente
     image: mysql
     restart: on-failure
